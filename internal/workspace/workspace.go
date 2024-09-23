@@ -50,7 +50,7 @@ func (ws *Workspace) LogValue() slog.Value {
 // VarsFile returns the filename of the workspace's terraform variables file
 // and whether it exists or not.
 func (ws *Workspace) VarsFile(workdir internal.Workdir) (string, bool) {
-	fname := fmt.Sprintf("%s.tfvars", ws.Name)
+	fname := filepath.Join("vars", fmt.Sprintf("%s.tfvars", ws.Name))
 	path := filepath.Join(workdir.String(), ws.ModulePath, fname)
 	_, err := os.Stat(path)
 	return fname, err == nil

@@ -20,7 +20,7 @@ func TestCost_generateInfracostConfig(t *testing.T) {
 	require.NoError(t, err)
 
 	// Create a workspace tfvars file for ws2
-	path := workdir.Join(mod.Path, "dev.tfvars")
+	path := workdir.Join(mod.Path, "vars", "dev.tfvars")
 	os.MkdirAll(filepath.Dir(path), 0o755)
 	_, err = os.Create(path)
 	require.NoError(t, err)
@@ -32,7 +32,7 @@ projects:
   - path: a/b/c
     terraform_workspace: dev
     terraform_var_files:
-      - dev.tfvars
+      - vars/dev.tfvars
 `
 
 	got, err := generateCostConfig(workdir, ws1, ws2)

@@ -25,12 +25,12 @@ func TestWorkspace_VarsFile(t *testing.T) {
 	require.NoError(t, err)
 
 	// Create a workspace tfvars file for dev
-	path := workdir.Join(mod.Path, "dev.tfvars")
+	path := workdir.Join(mod.Path, "vars", "dev.tfvars")
 	os.MkdirAll(filepath.Dir(path), 0o755)
 	_, err = os.Create(path)
 	require.NoError(t, err)
 
 	got, ok := ws.VarsFile(workdir)
 	require.True(t, ok)
-	assert.Equal(t, "dev.tfvars", got)
+	assert.Equal(t, "vars/dev.tfvars", got)
 }

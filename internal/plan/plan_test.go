@@ -19,7 +19,7 @@ func TestPlan_VarsFile(t *testing.T) {
 	f, mod, ws := setupTest(t)
 
 	// Create a workspace tfvars file for dev
-	path := f.workdir.Join(mod.Path, "dev.tfvars")
+	path := f.workdir.Join(mod.Path, "vars", "dev.tfvars")
 	os.MkdirAll(filepath.Dir(path), 0o755)
 	_, err := os.Create(path)
 	require.NoError(t, err)
@@ -28,7 +28,7 @@ func TestPlan_VarsFile(t *testing.T) {
 	require.NoError(t, err)
 
 	if assert.NotNil(t, run.varsFileArg) {
-		assert.Equal(t, *run.varsFileArg, "-var-file=dev.tfvars")
+		assert.Equal(t, "-var-file=vars/dev.tfvars", *run.varsFileArg)
 	}
 }
 
